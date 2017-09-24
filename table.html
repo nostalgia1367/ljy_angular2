@@ -1,0 +1,95 @@
+<html>
+    <body>
+        <table border="1" id="table1">
+            <thead>
+                <th data-field="name">이름</th>
+                <th data-field="address">주소</th>
+                <th data-field="gender">성별</th>
+                <th data-field="id">아이디</th>
+                <th data-field="regDate">가입일</th>
+                <th data-field="btn">유저삭제</th>
+                <th data-field="modBtn">수정</th>
+            </thead>
+            <tbody id="tb1"></tbody>
+
+        </table>
+        <div id="nodeDiv"></div>
+        <br>
+        <div id="nodeDiv2"></div>
+    </body>
+    <script>
+        var tableObj = document.getElementById("table1")
+       // alert(tableObj.getAttribute("id"));
+       var nodes = tableObj.childNodes;
+       console.log(nodes);
+       var divObj = document.getElementById("nodeDiv");
+       
+       for(var j=0; j<nodes.length; j++){
+           divObj.innerHTML += nodes[j];
+       }
+
+       var divObj2 = document.getElementById("nodeDiv2");
+       var thObj = nodes[1].childNodes;
+       var trObj = thObj[1].childNodes;
+       //console.log("커스텀태그 로그 찍기"+thObj);
+       //console.log("========thObj=========================");
+       //console.log(thObj);
+       //console.log("========thObj=========================");
+       //console.log(trObj.length);
+
+       var keyStrs = new Array();
+       for(var k=0; k<trObj.length; k++){
+           var tro = trObj[k];
+           try{
+                if(tro.getAttribute("data-field") != null){
+                    //divObj.innerHTML += tro;
+                    console.log(keyStrs.length);
+                    keyStrs[keyStrs.length] = tro.getAttribute("data-field");
+                }
+           }catch(e){
+
+           }
+        }
+           //divObj2.innerHTML += trObj[i];
+        divObj2.innerHTML += keyStrs;
+       console.log("크기:"+keyStrs.length);
+      
+       var tbList = {};
+       tbList["name"] = "이재용";
+       tbList["address"] = "서울";
+       tbList["gender"] = "남자";
+       tbList["id"] = "nostalgia";
+       tbList["regDate"] = "2017-09-24";
+       tbList["btn"] = "<input type='button' name='delBtn' id='delBtn' value='삭제' />";
+       tbList["modBtn"] = "<input type='button' name='modBtn' id='modBtn' value='수정' />";
+        
+       var tb1Str ="";
+       tb1Str += "<tr>";
+        for(var i=0; i < keyStrs.length; i++){
+            tb1Str += "<td>"+ tbList[keyStrs[i]] + "</td>";
+        }
+    //    tb1Str += "<td>"+ tbList["name"]+"</td>";
+    //    tb1Str += "<td>"+ tbList["address"]+"</td>";
+    //    tb1Str += "<td>"+ tbList["gender"]+"</td>";
+    //    tb1Str += "<td>"+ tbList["id"]+"</td>";
+    //    tb1Str += "<td>"+ tbList["regDate"]+"</td>";
+    //    tb1Str += "<td>"+ tbList["btn"]+"</td>";
+       tb1Str += "</tr>";
+
+       var tbObj = document.getElementById("tb1");
+       var inputObj = document.getElementsByTagName("input");
+      
+        
+
+       tbObj.innerHTML = tb1Str;
+       for(var i=0, max = inputObj.length; i<max; i++){
+           var iObj = inputObj[i];
+           if(iObj.getAttribute("type")== "button"){
+               iObj.onclick = function(){
+                   alert(this.value);
+               };
+           }
+       }
+            
+    </script>
+</html>
