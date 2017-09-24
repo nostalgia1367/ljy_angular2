@@ -1,0 +1,59 @@
+
+<script type="text/javascript" src="./test.js"></script>
+<script type="text/javascript" src="./person.js"></script>
+
+<input type="text" name="name" id="id" data-test="테스트"/>
+<input type="text" name="cnt" id="cnt" />
+<input type="button" id="cntBtn" value="생성" onclick="makeTable()" />
+<div id="result_div"></div>
+
+
+<script>
+    var t = new Test();
+    // t.alertStr("a","b");
+
+    //alert(t.plus()); //private 이기때문에 접근이 바로 불가능하다.
+
+    var p = new Person("ㅁㅁㅁ");
+    p.name = "ㅈㅈㅈ";
+    //p.alertName();
+
+    //var testObj = document.getElementById("data-test");
+    //alert("data-test: "+testObj.getAttribute("data-test"));
+
+    
+    var p2 = new Person("이름",100,"남자","서울시 ....")
+    p2.writePersonInfo();
+    p2.setName("이름222");
+    p2.writePersonInfo();
+
+    p.play = function(){
+        document.write("<br>논다");
+    } //p.play는 함수이기전에 변수로 선언이 됐기 때문에.. 다시 선언해도 된다. (유연)
+    p.play(); 
+
+    /*var a = 3;
+    {a = 4}
+    alert(a);
+    */
+    function makeTable(){
+        var cntObj = document.getElementById("cnt");
+        var count = new Number(cntObj.value);
+        var str ="<table border='1'> ";
+        var rDivObj = document.getElementById("result_div");
+        // alert(count);
+        for(var i=1; i<=count; i++){
+            //str += i +"번 돌고있습니다.<br>";
+            //rDivObj.innerHTML += i +"번 돌고있습니다.<br>";
+            str += "<tr>";
+                for(var j=1; j<= count; j++){
+                    str += "<td>" + (((i-1) *2 )+j) + "</td>";
+                }
+                str += "</tr>"
+            
+        }
+        str += "</table>";
+        rDivObj.innerHTML = str;
+    }
+
+</script>
