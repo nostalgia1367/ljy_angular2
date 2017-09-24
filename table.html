@@ -60,8 +60,8 @@
        tbList["gender"] = "남자";
        tbList["id"] = "nostalgia";
        tbList["regDate"] = "2017-09-24";
-       tbList["btn"] = "<input type='button' name='delBtn' id='delBtn' value='삭제' />";
-       tbList["modBtn"] = "<input type='button' name='modBtn' id='modBtn' value='수정' />";
+       tbList["btn"] = "<input type='button' name='delBtn' id='delBtn' data-func='delete' value='삭제' />";
+       tbList["modBtn"] = "<input type='button' name='modBtn' id='modBtn' data-func='modify' value='수정' />";
         
        var tb1Str ="";
        tb1Str += "<tr>";
@@ -86,7 +86,12 @@
            var iObj = inputObj[i];
            if(iObj.getAttribute("type")== "button"){
                iObj.onclick = function(){
-                   alert(this.value);
+                   //alert(this.value);
+                   if(this.getAttribute("data-func") == "delete"){
+                       alert("삭제 관련 이벤트");
+                   }else if(this.getAttribute("data-func") == 'modify'){
+                    alert("수정 관련 이벤트");
+                   }
                };
            }
        }
